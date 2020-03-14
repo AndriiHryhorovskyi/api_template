@@ -1,1 +1,1 @@
-module.exports = data => data;
+module.exports = async data => data;
