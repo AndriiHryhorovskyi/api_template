@@ -1,6 +1,6 @@
 {
   "name": "new-layout",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -8,6 +8,7 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node src/server/http.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
