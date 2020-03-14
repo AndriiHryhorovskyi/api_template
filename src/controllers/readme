@@ -1,1 +1,0 @@
-Controllers must take a client and send response. Also it can wark with actors (sms, email etc.)
