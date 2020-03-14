@@ -1,6 +1,6 @@
 {
   "name": "new-layout",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -13,5 +13,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
