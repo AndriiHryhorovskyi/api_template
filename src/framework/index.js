@@ -7,7 +7,6 @@ const app = express();
 
 // setup CORS
 app.use((req, res, next) => {
-  logger.log('request:',req.path)
   const allowOrigins = ALLOW_ORIGINS.split(" ");
   const origin = req.headers.Origin || "*";
   const allowedOrigin = allowOrigins.find(o => o === origin);
