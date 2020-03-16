@@ -1,5 +1,21 @@
 const { hello, id } = require("../BL");
 
+/**
+ * @api {get} / Say hello
+ * @apiPermission none
+ *
+ * @apiName sayHello
+ * @apiGroup Sys
+ * @apiDescription route for test
+ *
+ * @apiSuccess {String} data Test response
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "data": "Hi",
+ *   }
+ */
 async function sayHello(req, res, next) {
   const resData = { data: "" };
   // catch errors
@@ -15,6 +31,22 @@ async function sayHello(req, res, next) {
   }
 }
 
+/**
+ * @api {post} /echo Echo route
+ * @apiPermission none
+ *
+ * @apiName echo
+ * @apiGroup Sys
+ * @apiDescription return data from request body
+ *
+ * @apiSuccess {String} data Test response
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "key": "value",
+ *   }
+ */
 async function echo(req, res, next) {
   const resData = { data: undefined };
   // catch errors

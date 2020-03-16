@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node src/server/http.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src tests --fix"
+    "lint": "eslint src tests --fix",
+    "apidoc": "apidoc -i src/controllers/ -o doc/"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "rc": "^1.2.8"
   },
   "devDependencies": {
+    "apidoc": "^0.20.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",

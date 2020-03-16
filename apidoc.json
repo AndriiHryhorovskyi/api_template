@@ -1,0 +1,9 @@
+{
+  "name": "Some project name",
+  "version": "0.0.0",
+  "description": "REST API node.js project template",
+  "title": "Project name API",
+  "template": {
+    "withGenerator": false
+  }
+}
