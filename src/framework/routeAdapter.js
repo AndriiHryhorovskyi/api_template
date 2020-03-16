@@ -1,15 +1,14 @@
 const router = require("express").Router();
-const { importAll } = require("../lib");
 const routeCollectionHash = require("../routes");
 
-for (routeCollectionName in routeCollectionHash) {
-  const routeCollection = routeCollectionHash[routeCollectionName];
+Object.keys(routeCollectionHash).forEach(routeCollectionName => {
+  const routeList = routeCollectionHash[routeCollectionName];
 
-  for (route of routeCollection) {
+  routeList.forEach(route => {
     const path = `/${routeCollectionName}${route.path}`;
     const method = route.method.toLowerCase();
     router[method](path, route.handler);
-  }
-}
+  });
+});
 
 module.exports = router;

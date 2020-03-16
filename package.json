@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node src/server/http.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src tests --fix"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,13 @@
   "dependencies": {
     "express": "^4.17.1",
     "rc": "^1.2.8"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
   }
 }

@@ -1,5 +1,5 @@
 const express = require("express");
-const { logger } = require("../actors");
+const { logger } = require("../lib");
 const router = require("./routeAdapter.js");
 const { ALLOW_ORIGINS } = require("../config");
 
@@ -29,6 +29,7 @@ app.use((req, res) => {
   res.status(404).end();
 });
 
+// eslint-disable-next-line
 router.use((err, req, res, next) => {
   logger.error(`Internal server error: `, err);
 

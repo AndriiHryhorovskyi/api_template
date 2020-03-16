@@ -48,7 +48,7 @@ function onError(err) {
 
   if (!(err.code in errCodeStrategies)) throw err;
 
-  errCodeStratagies[err.code]();
+  errCodeStrategies[err.code]();
   process.exit(1);
 }
 
@@ -80,14 +80,15 @@ async function closeConnections() {
     Refresh: REFRESH_TIMEOUT,
   };
 
-  for (const [connection, res] of connections.entries()) {
+  const connectionList = [...connections.entries()];
+  connectionList.forEach(([connection, res]) => {
     connections.delete(connection);
     if (!res.headersSent) {
       res.writeHead(503, HTTP_HEADERS);
       res.end("Service is unavailable");
     }
     connection.destroy();
-  }
+  });
 }
 
 async function gracefulShutdown() {

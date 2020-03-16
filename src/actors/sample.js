@@ -1,6 +1,8 @@
+const { logger } = require("../lib");
+
 module.exports = {
   instance: { name: "sample" },
   close: async () => {
-    console.info("Sample actor is closed");
+    logger.info("Sample actor is closed");
   },
 };
