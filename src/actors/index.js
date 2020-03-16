@@ -8,7 +8,7 @@ const actorsInstances = Object.entries(actors).reduce(
   {},
 );
 
-const exitAll = () =>
-  Promise.allSettled(actorsNames.map(actorName => actors[actorName].exit()));
+const closeAllActors = () =>
+  Promise.allSettled(actorsNames.map(actorName => actors[actorName].close()));
 
-module.exports = { ...actorsInstances, exitAll };
+module.exports = { ...actorsInstances, closeAllActors };
