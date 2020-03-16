@@ -1,4 +1,6 @@
 module.exports = {
   PORT: 3000,
   ALLOW_ORIGINS: "*",
+  SHUTDOWN_TIMEOUT: 3000,
+  REFRESH_TIMEOUT: 5 
 };
