@@ -1,6 +1,6 @@
 {
-  "extends": ["airbnb-base", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb-base", "plugin:security/recommended", "prettier"],
+  "plugins": ["prettier", "security"],
   "rules": {
     "prettier/prettier": "error",
     "no-plusplus": [

@@ -13,7 +13,8 @@
     "lint": "eslint src tests --fix",
     "apidoc": "apidoc -i src/controllers/ -o doc/",
     "release": "standard-version",
-    "inspect:cp": "jscpd src/"
+    "inspect:cp": "jscpd src/",
+    "inspect:deps": "npm audit && snyk test"
   },
   "keywords": [],
   "author": "",
@@ -31,10 +32,13 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-security": "^1.4.0",
     "husky": "^4.2.3",
     "jscpd": "^3.1.0",
     "lint-staged": "^10.0.8",
+    "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
+    "snyk": "^1.299.0",
     "standard-version": "^7.1.0"
   },
   "husky": {
