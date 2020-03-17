@@ -1,0 +1,6 @@
+{
+  "minLines": 1,
+  "maxLines": 10000,
+  "reporters": ["console", "consoleFull", "html"],
+  "output": "./report"
+}
