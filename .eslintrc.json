@@ -14,7 +14,8 @@
       {
         "functions": false
       }
-    ]
+    ],
+    "import/no-unresolved": [0]
   },
   "env": {
     "node": true,

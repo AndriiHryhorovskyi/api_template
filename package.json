@@ -1,6 +1,6 @@
 {
   "name": "new-layout",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "",
   "main": "src/srver/http.js",
   "directories": {
@@ -10,7 +10,11 @@
   "scripts": {
     "start": "NODE_ENV=production node src/server/http.js",
     "dev": "nodemon src/server/http.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest unit/* -i --no-cache",
+    "test:integration": "jest integration/* -i --no-cache",
+    "test:unit:watch": "jest unit/* -i --no-cache --watch",
+    "test:integration:watch": "jest integration/* -i --no-cache --watch",
     "lint": "eslint src tests --fix",
     "apidoc": "apidoc -i src/controllers/ -o doc/",
     "release": "standard-version",
@@ -35,12 +39,14 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^4.2.3",
+    "jest": "^25.1.0",
     "jscpd": "^3.1.0",
     "lint-staged": "^10.0.8",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "snyk": "^1.299.0",
-    "standard-version": "^7.1.0"
+    "standard-version": "^7.1.0",
+    "superagent": "^5.2.2"
   },
   "husky": {
     "hooks": {
@@ -49,6 +55,8 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run lint"]
+    "*.js": [
+      "npm run lint"
+    ]
   }
 }
