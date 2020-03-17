@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "signal": "SIGINT",
+  "watch": ["src/"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "execMap": {
+    "js": "node --stack-trace-limit=1000"
+  }
+}
