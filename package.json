@@ -11,7 +11,8 @@
     "start": "node src/server/http.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src tests --fix",
-    "apidoc": "apidoc -i src/controllers/ -o doc/"
+    "apidoc": "apidoc -i src/controllers/ -o doc/",
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +32,8 @@
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "standard-version": "^7.1.0"
   },
   "husky": {
     "hooks": {
@@ -40,6 +42,8 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run lint" ]
+    "*.js": [
+      "npm run lint"
+    ]
   }
 }
