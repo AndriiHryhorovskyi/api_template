@@ -1,9 +1,12 @@
 const express = require("express");
+const expressPino = require("express-pino-logger");
 const { logger } = require("../lib");
 const router = require("./routeAdapter.js");
 const { ALLOW_ORIGINS } = require("../config");
 
 const app = express();
+
+app.use(expressPino({ logger }));
 
 // setup CORS
 app.use((req, res, next) => {

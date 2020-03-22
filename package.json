@@ -27,6 +27,8 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "pino": "^5.17.0",
     "rc": "^1.2.8"
   },
   "devDependencies": {
@@ -44,6 +46,7 @@
     "jscpd": "^3.1.0",
     "lint-staged": "^10.0.8",
     "nodemon": "^2.0.2",
+    "pino-pretty": "^3.6.1",
     "prettier": "^1.19.1",
     "snyk": "^1.299.0",
     "standard-version": "^7.1.0",

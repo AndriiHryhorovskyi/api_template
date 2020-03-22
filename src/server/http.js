@@ -18,16 +18,27 @@ const server = http
 
 process.on("SIGINT", async () => {
   if (!server.listening) return;
-
   logger.info("Stopping server");
   await gracefulShutdown();
   logger.info("Server has stopped");
   process.exit(0);
 });
 
-process.on("unhandledRejection", logger.error);
+process.on(
+  "unhandledRejection",
+  logger.uncaught((err, finalLogger) => {
+    finalLogger.error(err);
+    process.exit(1);
+  }),
+);
 
-process.on("uncaughtException", logger.error);
+process.on(
+  "uncaughtException",
+  logger.uncaught((err, finalLogger) => {
+    finalLogger.error(err);
+    process.exit(1);
+  }),
+);
 
 function onError(err) {
   if (err.syscall !== "listen") {
