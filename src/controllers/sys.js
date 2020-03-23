@@ -1,4 +1,4 @@
-const { hello, id } = require("../BL");
+const { sys: sysSrv } = require("../services");
 
 /**
  * @api {get} / Say hello
@@ -20,7 +20,7 @@ async function sayHello(req, res, next) {
   const resData = { data: "" };
   // catch errors
   try {
-    const result = await hello();
+    const result = await sysSrv.hello();
     // catch exceptions
     if (result instanceof Error) return res.status(418).send(result.message);
 
@@ -51,7 +51,7 @@ async function echo(req, res, next) {
   const resData = { data: undefined };
   // catch errors
   try {
-    const result = await id(req.body);
+    const result = await sysSrv.id(req.body);
     // catch exceptions
     if (result instanceof Error) return res.status(418).send(result.message);
 
