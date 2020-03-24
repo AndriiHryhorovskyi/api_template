@@ -1,5 +1,5 @@
 module.exports = {
   verbose: true,
   testEnvironment: "node",
-  modulePaths: ["<rootDir>/src/"],
+  modulePaths: ["<rootDir>/src/", "<rootDir>/tests/"],
 };
