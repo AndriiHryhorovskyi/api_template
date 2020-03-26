@@ -6,6 +6,9 @@ const { ALLOW_ORIGINS } = require("../config");
 
 const app = express();
 
+// Remove the X-Powered-By headers.
+app.disable("x-powered-by");
+
 app.use(expressPino({ logger }));
 
 // setup CORS
