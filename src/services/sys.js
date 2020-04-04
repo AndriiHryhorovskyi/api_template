@@ -1,4 +1,4 @@
-const hello = async () => "Hi";
-const id = async data => data;
+const hello = async () => [null, "Hi"];
+const id = async data => [null, data];
 
 module.exports = { hello, id };

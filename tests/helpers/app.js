@@ -8,7 +8,8 @@ const requestMethodsWrappers = {};
 /* eslint-disable */
 httpMethods.forEach(
   method =>
-    (requestMethodsWrappers[method] = url => app[method](`${WEBHOST}${url}`)),
+    (requestMethodsWrappers[method] = url =>
+      app[method](`${WEBHOST}${url}`).ok(res => res.status < 600)),
 );
 /* eslint-enable */
 

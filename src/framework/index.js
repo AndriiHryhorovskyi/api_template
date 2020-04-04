@@ -1,6 +1,7 @@
 const express = require("express");
 const expressPino = require("express-pino-logger");
-const { logger } = require("../lib");
+const { NOT_FOUND, INTERNAL_SERVER_ERROR } = require("http-status-codes");
+const { logger, errorBody } = require("../lib");
 const router = require("./routeAdapter.js");
 const { ALLOW_ORIGINS } = require("../config");
 
@@ -29,20 +30,25 @@ app.use((req, res, next) => {
   return next();
 });
 
+// disable caching for api
+app.use((req, res, next) => {
+  res.set("Cache-Control", "private, no-cache, no-store");
+  return next();
+});
+
 app.use(router);
 
 app.use((req, res) => {
-  res.status(404).end();
+  res.status(NOT_FOUND).end();
 });
 
 // eslint-disable-next-line
 router.use((err, req, res, next) => {
-  logger.error(`Internal server error: `, err);
+  logger.error(err, "Internal server error");
 
-  const status = 500;
-  const errorMsg = "Internal server error";
+  const errBody = errorBody("Internal server error");
 
-  return res.status(status).json({ error: { message: errorMsg } });
+  res.status(INTERNAL_SERVER_ERROR).json(errBody);
 });
 
 module.exports = app;

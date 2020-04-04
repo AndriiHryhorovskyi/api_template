@@ -1,4 +1,5 @@
 const http = require("http");
+const { SERVICE_UNAVAILABLE, getStatusText } = require("http-status-codes");
 const { PORT, SHUTDOWN_TIMEOUT, REFRESH_TIMEOUT } = require("../config");
 const { logger } = require("../lib");
 const { closeAllActors } = require("../actors");
@@ -27,7 +28,7 @@ process.on("SIGINT", async () => {
 process.on(
   "unhandledRejection",
   logger.uncaught((err, finalLogger) => {
-    finalLogger.error(err);
+    finalLogger.error(err, "unhandledRejection");
     process.exit(1);
   }),
 );
@@ -35,7 +36,7 @@ process.on(
 process.on(
   "uncaughtException",
   logger.uncaught((err, finalLogger) => {
-    finalLogger.error(err);
+    finalLogger.error(err, "uncaughtException");
     process.exit(1);
   }),
 );
@@ -90,13 +91,14 @@ async function closeConnections() {
     "Content-Type": "text/plain",
     Refresh: REFRESH_TIMEOUT,
   };
-
+  const message = getStatusText(SERVICE_UNAVAILABLE);
   const connectionList = [...connections.entries()];
+
   connectionList.forEach(([connection, res]) => {
     connections.delete(connection);
     if (!res.headersSent) {
-      res.writeHead(503, HTTP_HEADERS);
-      res.end("Service is unavailable");
+      res.writeHead(SERVICE_UNAVAILABLE, HTTP_HEADERS);
+      res.end(message);
     }
     connection.destroy();
   });

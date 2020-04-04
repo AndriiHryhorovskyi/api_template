@@ -10,7 +10,7 @@ module.exports = rc("res_api_template", {
   IS_DEV,
   IS_PROD,
   ALLOW_ORIGINS: "*",
-  TREFRESH_TIMEOUT: 5,
+  REFRESH_TIMEOUT: 5,
   WEBHOST: `http://127.0.0.1:${PORT}`,
   SHUTDOWN_TIMEOUT: IS_PROD ? 3000 : 0,
 });

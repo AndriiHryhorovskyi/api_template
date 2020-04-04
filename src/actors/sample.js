@@ -1,8 +1,12 @@
 const { logger } = require("../lib");
 
+const instance = { name: "sample" };
+const close = () => {
+  logger.info("Sample actor is closed");
+  return Promise.resolve();
+};
+
 module.exports = {
-  instance: { name: "sample" },
-  close: async () => {
-    logger.info("Sample actor is closed");
-  },
+  instance,
+  close,
 };

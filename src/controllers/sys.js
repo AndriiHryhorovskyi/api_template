@@ -1,7 +1,9 @@
+const { OK, I_AM_A_TEATPOT } = require("http-status-codes");
 const { sys: sysSrv } = require("../services");
+const { errorBody } = require("../lib");
 
 /**
- * @api {get} / Say hello
+ * @api {get} /api/sys/ Say hello
  * @apiPermission none
  *
  * @apiName sayHello
@@ -20,19 +22,22 @@ async function sayHello(req, res, next) {
   const resData = { data: "" };
   // catch errors
   try {
-    const result = await sysSrv.hello();
+    const [err, result] = await sysSrv.hello();
     // catch exceptions
-    if (result instanceof Error) return res.status(418).send(result.message);
-
+    if (err) {
+      const errData = errorBody(result.message);
+      res.status(I_AM_A_TEATPOT).json(errData);
+      return;
+    }
     resData.data = result;
-    return res.status(200).json(resData);
+    res.status(OK).json(resData);
   } catch (error) {
-    return next(error);
+    next(error);
   }
 }
 
 /**
- * @api {post} /echo Echo route
+ * @api {post} /api/sys/echo Echo route
  * @apiPermission none
  *
  * @apiName echo
@@ -44,21 +49,25 @@ async function sayHello(req, res, next) {
  * @apiSuccessExample {json} Success-Response:
  *   HTTP/1.1 200 OK
  *   {
- *     "key": "value",
+ *     "data": value,
  *   }
  */
 async function echo(req, res, next) {
   const resData = { data: undefined };
   // catch errors
   try {
-    const result = await sysSrv.id(req.body);
+    const [err, result] = await sysSrv.id(req.body);
     // catch exceptions
-    if (result instanceof Error) return res.status(418).send(result.message);
+    if (err) {
+      const errData = errorBody(result.message);
+      res.status(I_AM_A_TEATPOT).json(errData);
+      return;
+    }
 
-    res.data = result;
-    return res.json(resData);
+    resData.data = result;
+    res.json(resData);
   } catch (error) {
-    return next(error);
+    next(error);
   }
 }
 

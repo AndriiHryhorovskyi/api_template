@@ -15,13 +15,20 @@ describe("validator lib", () => {
 
   test("validation error", async () => {
     const result = await validator.validate(validator.schemas.test, {});
-    expect(result).toBeInstanceOf(Error);
-    expect(result.message).toBe("Invalid param - name");
+    const error = result[0];
+
+    expect(error).toBeInstanceOf(Error);
+    expect(error.message).toBe("Invalid param - name");
   });
 
   test("validation successful", async () => {
     const data = { name: "testName" };
-    const result = await validator.validate(validator.schemas.test, data);
-    expect(result).toMatchObject(data);
+    const [err, validData] = await validator.validate(
+      validator.schemas.test,
+      data,
+    );
+
+    expect(err).toBeFalsy();
+    expect(validData).toMatchObject(data);
   });
 });

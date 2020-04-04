@@ -6,7 +6,7 @@ Object.keys(routeCollectionHash).forEach(routeCollectionName => {
   const routeList = routeCollectionHash[routeCollectionName];
 
   routeList.forEach(route => {
-    const path = `/${routeCollectionName}${route.path}`;
+    const path = `/api/${routeCollectionName}${route.path}`;
     const method = route.method.toLowerCase();
     // eslint-disable-next-line
     router[method](path, route.handler);
