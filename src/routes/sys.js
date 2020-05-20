@@ -1,14 +1,14 @@
-const { sys } = require("../controllers");
+'use strict';
 
-module.exports = [
+module.exports = ({ ctrls }) => [
   {
-    method: "GET",
-    path: "/",
-    handler: sys.sayHello,
+    method: 'GET',
+    path: '/api/sys',
+    handler: ctrls.sys.sayHello,
   },
   {
-    method: "GET",
-    path: "/echo",
-    handler: sys.echo,
+    method: 'GET',
+    path: '/api/sys/echo',
+    handler: ctrls.sys.echo,
   },
 ];

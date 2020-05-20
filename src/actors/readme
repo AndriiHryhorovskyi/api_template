@@ -1,3 +1,0 @@
-Here must be files with actors. Each of them must be a singleton (that run when startup) and export exit method and actor instance.
-Here must be index.js file. It imports all actors and exports actors instance, exitAll method and exit<actorName> medhods.
-In the future here can be an actor manager and actors will be export actor class

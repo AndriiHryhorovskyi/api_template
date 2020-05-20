@@ -1,7 +1,13 @@
-const app = require("superagent");
-const { WEBHOST } = require("config");
+'use strict';
 
-const httpMethods = ["get", "post", "options", "patch", "put", "delete"];
+const app = require('superagent');
+const {
+  SERVER: { HOST, PORTS },
+} = require('lib/config');
+
+const PORT = PORTS[0];
+const WEBHOST = `${HOST}:${PORT}`;
+const httpMethods = ['get', 'post', 'options', 'patch', 'put', 'delete'];
 
 const requestMethodsWrappers = {};
 

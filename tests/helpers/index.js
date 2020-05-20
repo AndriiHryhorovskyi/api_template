@@ -1,3 +1,5 @@
-const { importAll } = require("lib");
+'use strict';
 
-module.exports = importAll(__dirname);
+const importFiles = require('lib/importFiles');
+
+module.exports = importFiles(__dirname);
