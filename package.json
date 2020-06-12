@@ -8,6 +8,11 @@
     "doc": "doc",
     "test": "tests"
   },
+  "author": {
+    "name": "Andrii Hryhorovskyi",
+    "email": "private_ukr_pochta@ukr.net",
+    "url": "https://github.com/AndriiHryhorovskyi/"
+  },
   "scripts": {
     "start": "NODE_ENV=production node src/main.js",
     "dev": "nodemon src/main.js",
