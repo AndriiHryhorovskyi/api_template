@@ -2,7 +2,7 @@
   "name": "res-api-template",
   "version": "1.0.0",
   "private": true,
-  "description": "Rest project start template",
+  "description": "Rest api starter template",
   "main": "src/main.js",
   "directories": {
     "doc": "doc",
