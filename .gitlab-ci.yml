@@ -1,0 +1,114 @@
+image: node:14
+
+stages:
+  - build
+  - test
+  - publish
+  - deploy
+
+variables:
+  BACK_DEV_LATEST: $CI_REGISTRY_IMAGE/backend:dev-latest
+  BACK_DEV_COMMIT: $CI_REGISTRY_IMAGE/backend:dev-$CI_COMMIT_SHORT_SHA
+  BACK_PROD_LATEST: $CI_REGISTRY_IMAGE/backend:prod-latest
+  BACK_PROD_COMMIT: $CI_REGISTRY_IMAGE/backend:prod-$CI_COMMIT_SHORT_SHA
+
+.common_only: &common_only
+  only:
+    - merge_requests
+    - development
+    - master
+    - demo
+
+build_project:
+  stage: build
+  <<: *common_only
+  script:
+    - git fetch origin
+    - npm ci
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - /
+
+test_codebase:
+  stage: test
+  <<: *common_only
+  script:
+    - npm run lint
+    - npm test
+
+publish_dev:
+  image: docker:latest
+  stage: publish
+  only:
+    - development
+  environment: development
+  services:
+    - docker:dind
+  script:
+    - echo $APP_CONFIG > .petLayoutrc
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $BACK_DEV_LATEST -t $BACK_DEV_COMMIT ./
+    - docker push $BACK_DEV_LATEST
+    - docker push $BACK_DEV_COMMIT
+
+publish_prod:
+  image: docker:latest
+  stage: publish
+  only:
+    - master
+  environment: production
+  services:
+    - docker:dind
+  script:
+    - echo $APP_CONFIG > .petLayoutrc
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $BACK_PROD_LATEST -t $BACK_PROD_COMMIT ./
+    - docker push $BACK_PROD_LATEST
+    - docker push $BACK_PROD_COMMIT
+
+deploy_to_dev:
+  stage: deploy
+  only:
+    - development
+  environment: development
+  script:
+    - git config --global user.email "gitlab-ci-merge@gmail.com"
+    - git config --global user.name "Gitlab Merge Runner"
+    - git checkout development
+    - git merge origin/devDocumentation
+    - npm run doc
+    - echo "node_modules/" > .gitignore
+    - echo $APP_CONFIG > .petLayoutrc
+    - git add .
+    - "git commit -m \"docs: generate doc\""
+    - git remote add heroku-dev https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
+    - git push heroku-dev development:master -f
+
+deploy_to_demo:
+  stage: deploy
+  only:
+    - demo
+  environment: demo
+  script:
+    - git config --global user.email "gitlab-ci-merge@gmail.com"
+    - git config --global user.name "Gitlab Merge Runner"
+    - git checkout demo
+    - git merge origin/documentation
+    - npm run doc
+    - echo "node_modules/" > .gitignore
+    - echo $APP_CONFIG > .petLayoutrc
+    - git add .
+    - "git commit -m \"docs: generate doc\""
+    - git remote add heroku-demo https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
+    - git push heroku-demo demo:master -f
+
+deploy_to_prod:
+  stage: deploy
+  only:
+    - master
+  environment: production
+  script:
+    - echo $APP_CONFIG > .petLayoutrc
+    - git remote add heroku-prod https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
+    - git push heroku-prod master

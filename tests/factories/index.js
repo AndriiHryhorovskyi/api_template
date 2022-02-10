@@ -1,5 +1,5 @@
 'use strict';
 
-const { importAll } = require('lib');
+const importFiles = require('sys/importFiles');
 
-module.exports = importAll(__dirname);
+module.exports = importFiles(__dirname);

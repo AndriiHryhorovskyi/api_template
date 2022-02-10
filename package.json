@@ -1,65 +1,63 @@
 {
-  "name": "res-api-template",
+  "name": "pet-project-layout",
   "version": "1.0.0",
-  "private": true,
-  "description": "Rest api starter template",
-  "main": "src/main.js",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
-  "author": {
-    "name": "Andrii Hryhorovskyi",
-    "email": "private_ukr_pochta@ukr.net",
-    "url": "https://github.com/AndriiHryhorovskyi/"
-  },
+  "main": "src/index.js",
   "scripts": {
     "start": "NODE_ENV=production node src/main.js",
     "dev": "nodemon src/main.js",
-    "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "jest unit/* -i --no-cache",
-    "test:integration": "jest integration/* -i --no-cache",
-    "test:unit:watch": "jest unit/* -i --no-cache --watch",
-    "test:integration:watch": "jest integration/* -i --no-cache --watch",
-    "pem": "cert/generate.sh",
-    "lint": "eslint src tests --fix",
-    "apidoc": "apidoc -i src/controllers/ -o doc/",
-    "release": "standard-version",
-    "inspect:cp": "jscpd src/",
-    "inspect:deps": "npm audit && snyk test"
+    "test": "npm run test:unit && npm run test:integration && npm run test:scenarios",
+    "test:unit": "jest unit/* --no-cache --passWithNoTests",
+    "test:scenarios": "jest --clearCache && jest scenarios/* --forceExit",
+    "test:integration": "jest --clearCache && jest integration/* --forceExit",
+    "test:unit:watch": "jest unit/* --watch",
+    "test:integration:watch": "jest integration/* --watch",
+    "test:scenarios:watch": "jest jest scenarios/* --watch",
+    "seeds": "node seeds/index.js",
+    "lint:fix": "eslint src tests --fix",
+    "lint": "eslint src tests",
+    "doc": "apidoc -i src/api/ -o doc/",
+    "inspect:cp": "jscpd src/"
   },
-  "engines": {
-    "node": ">=12.5.0"
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.14",
+    "mongoose-lean-virtuals": "^0.8.0",
+    "pino": "^6.13.0",
+    "rc": "^1.2.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "apidoc": "^0.23.0",
-    "chance": "^1.1.6",
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "jscpd": "^3.3.0-rc.8",
-    "lint-staged": "^10.2.10",
-    "nodemon": "^2.0.4",
-    "pino-pretty": "^4.0.0",
-    "prettier": "^2.0.5",
-    "snyk": "^1.339.2",
-    "standard-version": "^8.0.0",
-    "superagent": "^5.2.2"
-  },
-  "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "co-body": "^6.0.0",
-    "express": "^4.17.1",
-    "nanoid": "^3.1.9",
-    "pg": "^8.2.1",
-    "pino": "^6.3.2",
-    "rc": "^1.2.8"
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "apidoc": "^0.26.0",
+    "axios-mock-adapter": "^1.20.0",
+    "babel-eslint": "^10.1.0",
+    "chance": "^1.1.7",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "get-port": "^5.1.1",
+    "husky": "^4.3.8",
+    "jest": "^27.0.6",
+    "jscpd": "^3.3.26",
+    "lint-staged": "^10.5.4",
+    "mongodb-memory-server": "^7.3.6",
+    "nodemon": "^2.0.12",
+    "pino-pretty": "^5.1.3",
+    "prettier": "^2.3.2",
+    "superagent": "^6.1.0"
   },
   "husky": {
     "hooks": {
@@ -68,8 +66,11 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint"
+    "src/**/*.js": [
+      "npm run lint:fix"
+    ],
+    "tests/**/*.js": [
+      "npm run lint:fix"
     ]
   }
 }

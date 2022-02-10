@@ -1,0 +1,9 @@
+{
+  "globals": {
+    "testData": "readonly",
+    "http": "readonly",
+    "helpers": "readonly",
+    "app": "readonly",
+    "factories": "readonly"
+  }
+}

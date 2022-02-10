@@ -1,5 +1,5 @@
 'use strict';
 
-const importFiles = require('lib/importFiles');
+const importFiles = require('sys/importFiles');
 
 module.exports = importFiles(__dirname);

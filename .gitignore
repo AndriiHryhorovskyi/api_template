@@ -1,5 +1,5 @@
 node_modules/
 doc/
-dist/
 report/
 *.pem
+.idea
